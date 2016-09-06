@@ -1,13 +1,12 @@
 // Same thing as $(document).ready(function(){}); just less code.
-$(function(){
+$(document).ready(function(){
   $('#search-term').submit(function(event){
     event.preventDefault();
     var searchTerm = $('#query').val();
-    {
-      showResults(data.Search);
-    }
+    getRequest(searchTerm);
+alert("something");
   });
-})
+});
 
 function getRequest(searchTerm){
   var params = {
@@ -17,15 +16,17 @@ function getRequest(searchTerm){
   url = 'http://www.omdbapi.com';
 
   $.getJSON(url, params, function(data){
+console.log(data);
+
     showResults(data.Search);
   });
 }
 
 function showResults(results) {
   var html = "";
-  $.each(results, function(index,value){
+  $.each(results, function(index, value){
     html += '<p>' + value.Title + '</p>';
     console.log(value.Title);
   });
-  $('#search-results').html(html);
+  $('.search-results').html(html);
 }
